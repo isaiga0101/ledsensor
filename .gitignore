@@ -1,3 +1,4 @@
 *.asmproj
 *.xml
 *Debug/
+*.db
