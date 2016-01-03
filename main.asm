@@ -18,7 +18,7 @@ main: sei				; allow interrupts
 	rcall init_AD		; Initialize A/D converter
 AD:
 	lds r16, adch		; Read A/D result into r16
-	cpi r16, 26			; Compare r16 to 26
+	cpi r16, 24			; Compare r16 to 26
 	brlo AD				; Branch if lower to AD
 	
 	ldi r16, ledp		; Load r16 with bit for led
