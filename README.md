@@ -1,2 +1,6 @@
 # ledsensor
-Turn an led into a sensor using an ATMega328P
+Turn an led into a light sensor using an ATMega328P
+
+## Pins Used
+
+  
