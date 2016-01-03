@@ -4,7 +4,9 @@
 ; Created: 12/31/2015 10:51:44 AM
 ; Author : Gayfi_000
 ;
-.equ	led	= 0
+.equ	led  = 0
+.equ	led1 = 1
+.equ	ledp = 0b11
 .org	0x0000
 	jmp main
 .org	0x0002
@@ -19,11 +21,13 @@ AD:
 	cpi r16, 26			; Compare r16 to 26
 	brlo AD				; Branch if lower to AD
 	
-	ldi r16, (1 << led)	; Load r16 with bit for led
+	ldi r16, ledp		; Load r16 with bit for led
 	out ddrb, r16		; Make led output and other pins input
 	nop					; Wait for ddrb to change
 	cbi portb, led		; Turn off led
+	cbi portb, led1		; Turn off led
 	rcall delay_1ms		; Delay_1ms 
+	sbi portb, led		; Turn on led
 	sbi portb, led		; Turn on led
     rjmp AD				; relative jump to AD, loop until interupt
 
@@ -31,10 +35,11 @@ AD:
 ; Interupt service routine
 int0_serv:
 
-	ldi r16, (1 << led) ; Load r16 with bit for led
+	ldi r16, ledp		; Load r16 with bit for led
 	out ddrb, r16		; Make led output and other pins input
 on:
-	sbi portb, led      ;Set bit of led
+	sbi portb, led      ; Set bit of led
+	sbi portb, led1		; Set bit of led
 
 	push r17			; Push r17 to the stack
 	ldi r17, 255		; Load r17 with 100
@@ -60,6 +65,7 @@ delay1:
 
 off:
 	cbi portb, led		; Clear bit of led
+	cbi portb, led1		; Clear bit of led2
 	reti				; Return
 
 ; Subroutines
