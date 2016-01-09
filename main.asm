@@ -4,13 +4,13 @@
 ; Created: 12/31/2015 10:51:44 AM
 ; Author : Gayfi_000
 ;
-.equ	led  = 0
-.equ	led1 = 1
-.equ	ledp = 0b11
-.org	0x0000
-	jmp main
-.org	0x0002
-	jmp int0_serv
+.equ	led  = 0		; First blue led
+.equ	led1 = 1		; Second blue led
+.equ	ledp = 0b11		; Port byte for ddrb
+.org	0x0000			; Main is located in address 0000
+	jmp main			; Jump to main
+.org	0x0002			; Int0 interupt should be at 0002
+	jmp int0_serv		; Jump to int0_serv
 
 ; Main Code
 main: sei				; allow interrupts
@@ -33,6 +33,7 @@ AD:
 
 
 ; Interupt service routine
+; Turns the led on for a little while and then back off.
 int0_serv:
 
 	ldi r16, ledp		; Load r16 with bit for led
