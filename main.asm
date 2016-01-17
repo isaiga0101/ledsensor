@@ -26,7 +26,7 @@ AD:
 	nop					; Wait for ddrb to change
 	cbi portb, led		; Turn off led
 	cbi portb, led1		; Turn off led
-	rcall delay_1ms		; Delay_1ms 
+	rcall delay_1ms		; Delay 1ms so that led appears off
 	sbi portb, led		; Turn on led
 	sbi portb, led		; Turn on led
     rjmp AD				; relative jump to AD, loop until interupt
