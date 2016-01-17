@@ -4,6 +4,12 @@
 ; Created: 12/31/2015 10:51:44 AM
 ; Author : Gayfi_000
 ;
+; This program uses half-duplex serial comunication using the uart proticol.
+; It sends one byte with the bits organized as follows:
+; stop nop nop nop nop nop led start
+;   1   0   0   0   0   0    0    1
+; The start bit is to tell when to start and the stop bit is the last bit. The led bit
+; is true when the light is on
 .equ	led  = 0		; First blue led
 .equ	led1 = 1		; Second blue led
 .equ	ledp = 0b11		; Port byte for ddrb
